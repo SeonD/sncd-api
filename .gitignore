@@ -7,3 +7,4 @@ temp/
 ts-node*/
 .editorconfig
 .env
+.env.k8s

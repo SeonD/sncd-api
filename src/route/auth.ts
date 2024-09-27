@@ -4,7 +4,8 @@ import { Response, Request, Router } from 'express';
 import { AUTH } from '../common/config';
 import { pluckDbObject } from '../common/helpers';
 import { authenticate } from '../middleware/auth/password';
-import { User } from '../model/user';
+import { authenticateJwt } from '../middleware/auth';
+import { User, getOneById as getUserById } from '../model/user';
 
 
 export const router = new Router();
@@ -50,4 +51,9 @@ router.post('/user', async (req: Request, res: Response) => {
   res.status(202).json({
     data: saved
   });
+});
+
+router.get('/user/:userId', authenticateJwt, async (req: Request, res: Response) => {
+  const user = await getUserById(req.params['userId']);
+  res.status(200).send(user);
 });

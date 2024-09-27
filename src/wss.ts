@@ -18,6 +18,7 @@ wsServer.on('connection', async (ws, request, client) => {
     ws.send('Socket open');
     const params = parseUrlQueryParams(request.url);
     const deckId = params['deck_id'];
+    // TODO: get token instead of user_id, then look up user_id based on the token.
     const userId = params['user_id'];
     if (!deckId || !userId) {
         ws.close();

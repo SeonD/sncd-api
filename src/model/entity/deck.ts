@@ -1,8 +1,11 @@
+'use strict';
+
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Permissioned } from './permissioned/base';
 import { User } from './user';
 
 @Entity()
-export class Deck {
+export class Deck extends Permissioned {
 
     @PrimaryGeneratedColumn("uuid")
     id: string;
@@ -22,4 +25,8 @@ export class Deck {
 
     @Column()
     currentSlide: number;
+
+    // We don't have the object hierarchy just yet.
+    // @ManyToOne(() => DeckList, deckList => deckList.decks)
+    // parent: DeckList;
 }
